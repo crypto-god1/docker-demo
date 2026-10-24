@@ -10,16 +10,20 @@ from flask import Flask, render_template, jsonify, request
 app = Flask(__name__)
 START_TIME = time.time()
 
-# In-memory student records for interactive demo
+# In-memory student records with comprehensive metadata
 students_db = [
     {
         "id": 1,
         "name": "Hare Preeth",
         "reg_no": "25BCE5652",
-        "dept": "Computer Science and Engineering",
+        "dept": "Computer Science & Engineering",
         "course": "Docker & Cloud Virtualization (DA3)",
         "grade": "O (10.0)",
-        "status": "Verified Active"
+        "status": "Verified Author",
+        "avatar_bg": "linear-gradient(135deg, #6366f1, #3b82f6)",
+        "initials": "HP",
+        "email": "harepreethkumar2711@gmail.com",
+        "created_at": "2026-10-24 12:30:00"
     },
     {
         "id": 2,
@@ -28,16 +32,24 @@ students_db = [
         "dept": "Information Technology",
         "course": "Operating Systems & RTOS Lab",
         "grade": "A+",
-        "status": "Enrolled"
+        "status": "Enrolled",
+        "avatar_bg": "linear-gradient(135deg, #10b981, #059669)",
+        "initials": "AM",
+        "email": "alex.mercer@college.edu",
+        "created_at": "2026-10-24 13:00:00"
     },
     {
         "id": 3,
         "name": "Sarah Connor",
         "reg_no": "25BCE5144",
-        "dept": "Computer Science and Engineering",
+        "dept": "Computer Science & Engineering",
         "course": "Microservices & Distributed Systems",
         "grade": "O (10.0)",
-        "status": "Enrolled"
+        "status": "Enrolled",
+        "avatar_bg": "linear-gradient(135deg, #ec4899, #8b5cf6)",
+        "initials": "SC",
+        "email": "sarah.connor@college.edu",
+        "created_at": "2026-10-24 13:15:00"
     }
 ]
 
@@ -89,9 +101,9 @@ def health():
     return jsonify({
         "status": "healthy",
         "code": 200,
-        "message": "Container is running smoothly",
+        "message": "Production microservice running optimally",
         "container_id": socket.gethostname(),
-        "student": "Hare Preeth (25BCE5652)",
+        "author": "Hare Preeth (25BCE5652)",
         "timestamp": datetime.utcnow().isoformat()
     })
 
@@ -105,11 +117,22 @@ def handle_students():
         data = request.get_json(silent=True) or {}
         name = data.get("name", "").strip()
         reg_no = data.get("reg_no", "").strip()
-        dept = data.get("dept", "Computer Science and Engineering").strip()
-        course = data.get("course", "Docker & RTOS").strip()
+        dept = data.get("dept", "Computer Science & Engineering").strip()
+        course = data.get("course", "Docker & Cloud Virtualization").strip()
+        email = data.get("email", "").strip()
 
         if not name or not reg_no:
-            return jsonify({"error": "Name and Reg No are required"}), 400
+            return jsonify({"error": "Name and Registration Number are required."}), 400
+
+        # Generate avatar initials and gradient
+        initials = "".join([part[0].upper() for part in name.split()[:2]]) or "ST"
+        gradients = [
+            "linear-gradient(135deg, #06b6d4, #3b82f6)",
+            "linear-gradient(135deg, #8b5cf6, #ec4899)",
+            "linear-gradient(135deg, #10b981, #0ea5e9)",
+            "linear-gradient(135deg, #f59e0b, #ef4444)"
+        ]
+        color_idx = len(students_db) % len(gradients)
 
         new_student = {
             "id": (max([s["id"] for s in students_db]) + 1) if students_db else 1,
@@ -117,8 +140,12 @@ def handle_students():
             "reg_no": reg_no,
             "dept": dept,
             "course": course,
-            "grade": "A",
-            "status": "Active"
+            "grade": "A+",
+            "status": "Enrolled",
+            "avatar_bg": gradients[color_idx],
+            "initials": initials,
+            "email": email or f"{reg_no.lower()}@college.edu",
+            "created_at": datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
         }
         students_db.append(new_student)
         return jsonify({"success": True, "student": new_student}), 201
@@ -131,8 +158,8 @@ def delete_student(student_id):
     before = len(students_db)
     students_db = [s for s in students_db if s["id"] != student_id]
     if len(students_db) < before:
-        return jsonify({"success": True, "message": f"Student #{student_id} removed"})
-    return jsonify({"error": "Student not found"}), 404
+        return jsonify({"success": True, "message": f"Student record #{student_id} purged."})
+    return jsonify({"error": "Student record not found."}), 404
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=False)
