@@ -3,25 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cloud Portal | Hare Preeth (25BCE5652)</title>
+  <title>Docker Studio &amp; Student Portal | Hare Preeth (25BCE5652)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-canvas: #090d16;
-      --bg-surface: rgba(17, 24, 39, 0.72);
+      --bg-canvas: #070a12;
+      --bg-surface: rgba(15, 23, 42, 0.75);
       --bg-surface-hover: rgba(30, 41, 59, 0.85);
-      --bg-surface-elevated: #111827;
+      --bg-surface-elevated: #0f172a;
       --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-focus: rgba(99, 102, 241, 0.5);
-      --border-bright: rgba(56, 189, 248, 0.4);
-      --brand-primary: #3b82f6;
-      --brand-gradient: linear-gradient(135deg, #3b82f6 0%, #6366f1 50%, #8b5cf6 100%);
+      --border-focus: rgba(56, 189, 248, 0.5);
+      --border-bright: rgba(56, 189, 248, 0.35);
+      --brand-primary: #38bdf8;
+      --brand-gradient: linear-gradient(135deg, #0284c7 0%, #3b82f6 50%, #6366f1 100%);
       --accent-cyan: #06b6d4;
       --accent-emerald: #10b981;
       --accent-amber: #f59e0b;
       --accent-rose: #f43f5e;
+      --accent-purple: #a855f7;
       --text-primary: #f8fafc;
       --text-secondary: #94a3b8;
       --text-tertiary: #64748b;
@@ -29,8 +30,8 @@
       --radius-md: 12px;
       --radius-lg: 16px;
       --radius-full: 9999px;
-      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
-      --shadow-lg: 0 20px 35px -10px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(255, 255, 255, 0.05);
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 1px 1px rgba(255, 255, 255, 0.05);
       --transition-fast: 0.15s cubic-bezier(0.16, 1, 0.3, 1);
       --transition-base: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -51,15 +52,15 @@
       line-height: 1.5;
       font-size: 14px;
       background-image: 
-        radial-gradient(ellipse 90% 60% at 50% -15%, rgba(59, 130, 246, 0.12), transparent),
-        radial-gradient(ellipse 70% 40% at 85% 65%, rgba(99, 102, 241, 0.08), transparent),
-        radial-gradient(ellipse 60% 30% at 15% 95%, rgba(16, 185, 129, 0.06), transparent);
+        radial-gradient(ellipse 90% 50% at 50% -10%, rgba(56, 189, 248, 0.12), transparent),
+        radial-gradient(ellipse 70% 40% at 90% 70%, rgba(99, 102, 241, 0.09), transparent),
+        radial-gradient(ellipse 60% 30% at 10% 90%, rgba(16, 185, 129, 0.07), transparent);
       background-attachment: fixed;
       overflow-x: hidden;
     }
 
     .app-wrapper {
-      max-width: 1240px;
+      max-width: 1260px;
       margin: 0 auto;
       padding: 24px 24px 80px 24px;
     }
@@ -75,7 +76,7 @@
       -webkit-backdrop-filter: blur(20px);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       box-shadow: var(--shadow-sm);
     }
 
@@ -89,12 +90,12 @@
       width: 40px;
       height: 40px;
       border-radius: var(--radius-md);
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(99, 102, 241, 0.2));
-      border: 1px solid rgba(59, 130, 246, 0.3);
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(99, 102, 241, 0.22));
+      border: 1px solid rgba(56, 189, 248, 0.35);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 16px rgba(59, 130, 246, 0.2);
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.2);
     }
 
     .breadcrumbs {
@@ -107,11 +108,6 @@
     .breadcrumb-item {
       color: var(--text-tertiary);
       text-decoration: none;
-      transition: color var(--transition-fast);
-    }
-
-    .breadcrumb-item:hover {
-      color: var(--text-secondary);
     }
 
     .breadcrumb-separator {
@@ -141,7 +137,6 @@
       font-size: 12px;
       font-weight: 500;
       color: var(--accent-emerald);
-      letter-spacing: -0.01em;
     }
 
     .status-dot {
@@ -177,18 +172,18 @@
     }
 
     .btn:active {
-      transform: scale(0.98);
+      transform: scale(0.97);
     }
 
     .btn-primary {
       background: var(--brand-gradient);
       color: #ffffff;
-      box-shadow: 0 2px 10px rgba(59, 130, 246, 0.3);
+      box-shadow: 0 2px 10px rgba(56, 189, 248, 0.25);
     }
 
     .btn-primary:hover {
-      box-shadow: 0 4px 16px rgba(59, 130, 246, 0.45);
-      filter: brightness(1.05);
+      box-shadow: 0 4px 16px rgba(56, 189, 248, 0.4);
+      filter: brightness(1.06);
     }
 
     .btn-secondary {
@@ -202,6 +197,17 @@
       border-color: rgba(255, 255, 255, 0.16);
     }
 
+    .btn-emerald {
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: #ffffff;
+      box-shadow: 0 2px 10px rgba(16, 185, 129, 0.25);
+    }
+
+    .btn-emerald:hover {
+      filter: brightness(1.08);
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+    }
+
     .btn-danger {
       background: rgba(244, 63, 94, 0.12);
       color: #fb7185;
@@ -209,7 +215,7 @@
     }
 
     .btn-danger:hover {
-      background: rgba(244, 63, 94, 0.2);
+      background: rgba(244, 63, 94, 0.22);
     }
 
     .btn-icon {
@@ -220,10 +226,10 @@
     /* Hero Banner */
     .hero-banner {
       position: relative;
-      background: linear-gradient(135deg, rgba(17, 24, 39, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(10, 15, 30, 0.95) 100%);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
-      padding: 32px 32px 28px;
+      padding: 28px 30px;
       margin-bottom: 24px;
       box-shadow: var(--shadow-sm);
       overflow: hidden;
@@ -236,7 +242,7 @@
       right: -80px;
       width: 280px;
       height: 280px;
-      background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -249,23 +255,23 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: var(--brand-primary);
-      background: rgba(59, 130, 246, 0.1);
+      background: rgba(56, 189, 248, 0.1);
       padding: 4px 10px;
       border-radius: var(--radius-full);
-      border: 1px solid rgba(59, 130, 246, 0.2);
+      border: 1px solid rgba(56, 189, 248, 0.2);
       margin-bottom: 12px;
     }
 
     .hero-title {
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 700;
       letter-spacing: -0.02em;
       color: #ffffff;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .hero-title span {
-      background: linear-gradient(135deg, #60a5fa, #a78bfa);
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -273,9 +279,9 @@
     .hero-desc {
       color: var(--text-secondary);
       font-size: 14px;
-      max-width: 680px;
-      margin-bottom: 20px;
-      line-height: 1.6;
+      max-width: 720px;
+      margin-bottom: 16px;
+      line-height: 1.55;
     }
 
     .hero-meta-bar {
@@ -283,7 +289,7 @@
       flex-wrap: wrap;
       align-items: center;
       gap: 16px;
-      padding-top: 16px;
+      padding-top: 14px;
       border-top: 1px solid var(--border-subtle);
       font-size: 13px;
     }
@@ -307,7 +313,7 @@
       border: 1px solid var(--border-subtle);
       padding: 2px 7px;
       border-radius: 4px;
-      color: var(--accent-cyan);
+      color: var(--brand-primary);
     }
 
     /* Metric KPI Grid */
@@ -315,7 +321,7 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 16px;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
 
     .metric-card {
@@ -325,21 +331,20 @@
       padding: 18px 20px;
       backdrop-filter: blur(12px);
       transition: all var(--transition-base);
-      position: relative;
     }
 
     .metric-card:hover {
       background: var(--bg-surface-hover);
-      border-color: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.15);
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
     }
 
     .metric-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .metric-label {
@@ -357,7 +362,7 @@
     }
 
     .metric-value {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 700;
       color: #ffffff;
       letter-spacing: -0.01em;
@@ -383,12 +388,147 @@
 
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--brand-primary), var(--accent-cyan));
+      background: linear-gradient(90deg, var(--brand-primary), var(--accent-emerald));
       border-radius: var(--radius-full);
       transition: width 0.4s ease;
     }
 
-    /* Student Management Data Table Section */
+    /* Studio & Split Layout */
+    .section-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    /* Docker File Studio Card */
+    .docker-studio-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(20px);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 28px;
+      overflow: hidden;
+    }
+
+    .editor-header {
+      padding: 14px 20px;
+      background: rgba(10, 15, 28, 0.6);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .file-tabs {
+      display: flex;
+      gap: 6px;
+    }
+
+    .file-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      font-family: 'Fira Code', monospace;
+      font-size: 12px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .file-tab:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
+    }
+
+    .file-tab.active {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: rgba(56, 189, 248, 0.35);
+      color: var(--brand-primary);
+    }
+
+    .editor-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .preset-select {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 12px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .editor-container {
+      display: flex;
+      background: #050811;
+      min-height: 260px;
+      position: relative;
+    }
+
+    .line-numbers {
+      padding: 16px 12px;
+      text-align: right;
+      color: #3b4252;
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      user-select: none;
+      background: #04060d;
+      border-right: 1px solid rgba(255, 255, 255, 0.05);
+      min-width: 48px;
+    }
+
+    .code-editor {
+      flex: 1;
+      padding: 16px 18px;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #e2e8f0;
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      resize: vertical;
+      min-height: 260px;
+      white-space: pre;
+      tab-size: 2;
+    }
+
+    .editor-footer {
+      padding: 10px 20px;
+      background: rgba(10, 15, 28, 0.4);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+
+    /* Student Directory Data Table Section */
     .table-container {
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
@@ -396,10 +536,11 @@
       backdrop-filter: blur(20px);
       box-shadow: var(--shadow-sm);
       overflow: hidden;
+      margin-bottom: 28px;
     }
 
     .table-toolbar {
-      padding: 18px 22px;
+      padding: 16px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -419,7 +560,7 @@
     .search-input-wrapper {
       position: relative;
       flex: 1;
-      max-width: 380px;
+      max-width: 360px;
     }
 
     .search-icon {
@@ -446,7 +587,7 @@
 
     .search-input:focus {
       border-color: var(--brand-primary);
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
       background: rgba(15, 23, 42, 0.9);
     }
 
@@ -460,17 +601,12 @@
       font-size: 13px;
       outline: none;
       cursor: pointer;
-      transition: border-color var(--transition-fast);
-    }
-
-    .filter-select:focus {
-      border-color: var(--brand-primary);
     }
 
     .toolbar-right {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .record-count {
@@ -512,10 +648,6 @@
 
     .data-table tr:hover td {
       background-color: rgba(255, 255, 255, 0.02);
-    }
-
-    .data-table tr:last-child td {
-      border-bottom: none;
     }
 
     .student-cell {
@@ -564,16 +696,104 @@
       font-weight: 500;
     }
 
-    .badge-verified {
-      background: rgba(99, 102, 241, 0.12);
-      color: #a5b4fc;
-      border: 1px solid rgba(99, 102, 241, 0.3);
-    }
-
     .badge-enrolled {
       background: rgba(16, 185, 129, 0.1);
       color: #6ee7b7;
       border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .action-group {
+      display: flex;
+      justify-content: flex-end;
+      gap: 6px;
+    }
+
+    /* Empty State */
+    .empty-state-box {
+      padding: 56px 20px;
+      text-align: center;
+      color: var(--text-tertiary);
+    }
+
+    .empty-icon-circle {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      color: var(--brand-primary);
+    }
+
+    /* Terminal Console */
+    .terminal-card {
+      background: #050811;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .terminal-header {
+      background: rgba(15, 23, 42, 0.8);
+      padding: 10px 18px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .terminal-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .terminal-screen {
+      padding: 16px 20px;
+      font-family: 'Fira Code', monospace;
+      font-size: 13px;
+      color: #a5f3fc;
+      line-height: 1.6;
+      max-height: 220px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+
+    .terminal-toolbar {
+      padding: 10px 18px;
+      background: rgba(10, 15, 28, 0.6);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .term-chip {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-family: 'Fira Code', monospace;
+      font-size: 11px;
+      color: var(--brand-primary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .term-chip:hover {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--brand-primary);
     }
 
     /* Modal Component */
@@ -583,7 +803,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(5, 8, 15, 0.7);
+      background: rgba(5, 8, 15, 0.75);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       z-index: 1000;
@@ -618,7 +838,7 @@
     }
 
     .modal-header {
-      padding: 20px 24px;
+      padding: 18px 24px;
       border-bottom: 1px solid var(--border-subtle);
       display: flex;
       justify-content: space-between;
@@ -680,12 +900,12 @@
 
     .form-control:focus {
       border-color: var(--brand-primary);
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
     }
 
     .modal-footer {
       padding: 16px 24px;
-      background: rgba(15, 23, 42, 0.4);
+      background: rgba(10, 15, 28, 0.5);
       border-top: 1px solid var(--border-subtle);
       display: flex;
       justify-content: flex-end;
@@ -726,6 +946,17 @@
       opacity: 1;
     }
 
+    /* Canvas Confetti */
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 10000;
+    }
+
     /* Footer */
     .app-footer {
       margin-top: 48px;
@@ -755,12 +986,15 @@
 </head>
 <body>
 
+  <!-- Particle Confetti Canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
   <div class="app-wrapper">
 
-    <!-- Top Application Bar -->
+    <!-- Top Navigation Bar -->
     <header class="app-header">
       <div class="header-left">
-        <div class="brand-mark" title="Docker Engine Node">
+        <div class="brand-mark" title="Docker Engine Studio Node">
           <!-- Geometric Docker Logo SVG -->
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M22.5 10.5C21.8 7.5 19 6.5 19 6.5C18.5 4.5 16.5 3 14 3C13.8 3 13.5 3 13.3 3.1C12.3 2 10.8 1.5 9.2 1.8C7.5 2.1 6.1 3.5 5.7 5.2C4.5 5.5 3.5 6.3 3 7.5C1.5 8.5 0.5 10.2 0.5 12C0.5 16.5 4 20 8.5 20C14.5 20 20.5 17 22.5 10.5Z" fill="#38bdf8" fill-opacity="0.2"/>
@@ -778,18 +1012,25 @@
           <span class="breadcrumb-separator">/</span>
           <span class="breadcrumb-item">Cloud &amp; RTOS</span>
           <span class="breadcrumb-separator">/</span>
-          <span class="breadcrumb-current">Student Management Portal</span>
+          <span class="breadcrumb-current">Docker Studio &amp; Student Portal</span>
         </div>
       </div>
 
       <div class="header-right">
+        <!-- Tactile Sound Toggle -->
+        <button class="btn btn-secondary btn-icon" id="sound-btn" onclick="toggleSound()" title="Sound Effects (Tactile Audio)">
+          <svg id="sound-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+        </button>
+
         <div class="status-pill">
           <span class="status-dot"></span>
-          <span>Online &bull; Healthy</span>
+          <span id="live-ping">Online &bull; 8ms</span>
         </div>
+
         <button class="btn btn-secondary btn-icon" onclick="fetchLiveStats()" id="sync-btn" title="Sync live container metrics">
           <svg id="sync-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
         </button>
+
         <button class="btn btn-primary" onclick="openAddModal()">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Enroll Student
@@ -801,13 +1042,13 @@
     <section class="hero-banner">
       <div class="hero-eyebrow">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-        Production Container Service
+        Dockerized Cloud Infrastructure
       </div>
       <h1 class="hero-title">
-        Dockerized <span>Student Directory</span>
+        Docker Studio &amp; <span>Student Management</span>
       </h1>
       <p class="hero-desc">
-        High-performance microservice architecture running in isolated Linux namespaces. Built with asynchronous REST APIs for student lifecycle management and continuous container health telemetry.
+        A live interactive cloud platform allowing real-time viewing and editing of container <strong>Dockerfiles</strong> and <strong>requirements</strong> directly from the browser, with an in-memory student registry running inside isolated Linux namespaces.
       </p>
 
       <div class="hero-meta-bar">
@@ -820,12 +1061,12 @@
           <span class="code-tag">{{ info.student_reg }}</span>
         </div>
         <div class="meta-chip">
-          <span>Port Forwarding:</span>
+          <span>Container Port:</span>
           <span class="code-tag">5000:5000/tcp</span>
         </div>
         <div class="meta-chip">
-          <span>Course Focus:</span>
-          <span style="color: var(--accent-emerald); font-weight: 500;">DA3 Cloud &amp; RTOS</span>
+          <span>Assignment:</span>
+          <span style="color: var(--accent-emerald); font-weight: 500;">DA3 Docker &amp; RTOS</span>
         </div>
       </div>
     </section>
@@ -894,35 +1135,90 @@
       </div>
     </div>
 
-    <!-- Student Directory Data Table -->
+    <!-- DOCKER STUDIO: LIVE FILE EDITOR (Add/Edit Dockerfile & Requirements directly from UI) -->
+    <div class="docker-studio-card">
+      <div class="editor-header">
+        <div class="file-tabs">
+          <button class="file-tab active" id="tab-dockerfile" onclick="switchFile('Dockerfile')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/></svg>
+            Dockerfile
+          </button>
+          <button class="file-tab" id="tab-requirements" onclick="switchFile('requirements.txt')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            requirements.txt
+          </button>
+        </div>
+
+        <div class="editor-actions">
+          <select id="preset-selector" class="preset-select" onchange="applyPreset(this.value)">
+            <option value="">⚡ Quick Presets...</option>
+            <option value="python_slim">Python 3.11-Slim (Standard)</option>
+            <option value="python_alpine">Python 3.11-Alpine (Lightweight)</option>
+            <option value="multistage">Multi-Stage Hardened Build</option>
+            <option value="fastapi">FastAPI / Gunicorn Spec</option>
+          </select>
+
+          <button class="btn btn-secondary" onclick="validateDockerfile()" title="Verify syntax rules">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+            Check Syntax
+          </button>
+
+          <button class="btn btn-emerald" id="save-file-btn" onclick="saveActiveFile()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+            Save to Container
+          </button>
+        </div>
+      </div>
+
+      <div class="editor-container">
+        <div class="line-numbers" id="line-numbers">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8</div>
+        <textarea id="code-editor" class="code-editor" spellcheck="false" oninput="updateLineNumbers()"></textarea>
+      </div>
+
+      <div class="editor-footer">
+        <div id="editor-file-status">
+          <span style="color: var(--accent-emerald);">● File Active</span> &bull; <span id="file-size-info">0 bytes</span>
+        </div>
+        <div>
+          Target: <code>/app/<span id="active-filename-display">Dockerfile</span></code>
+        </div>
+      </div>
+    </div>
+
+    <!-- STUDENT DIRECTORY: REAL-TIME SEARCH, ADD & EDIT -->
     <div class="table-container">
       <div class="table-toolbar">
         <div class="toolbar-left">
-          <!-- Search Bar -->
           <div class="search-input-wrapper">
             <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             <input type="text" id="table-search" class="search-input" placeholder="Search by name, reg number, or course..." oninput="filterStudents()">
           </div>
 
-          <!-- Department Filter -->
           <select id="dept-filter" class="filter-select" onchange="filterStudents()">
             <option value="ALL">All Departments</option>
             <option value="Computer Science">Computer Science &amp; Eng.</option>
             <option value="Information Technology">Information Technology</option>
+            <option value="Electronics">Electronics &amp; Comm.</option>
           </select>
         </div>
 
         <div class="toolbar-right">
-          <span class="record-count" id="record-count-badge">{{ students|length }} ENROLLED</span>
+          <span class="record-count" id="record-count-badge">0 ENROLLED</span>
+          <button class="btn btn-secondary" onclick="seedSampleData()" title="Populate demo students">
+            ⚡ Seed Demo
+          </button>
           <button class="btn btn-secondary" onclick="exportJSON()" title="Export JSON records">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Export
           </button>
+          <button class="btn btn-primary" onclick="openAddModal()">
+            + Enroll Student
+          </button>
         </div>
       </div>
 
-      <!-- Responsive Data Table -->
-      <table class="data-table" id="students-table">
+      <!-- Data Table -->
+      <table class="data-table" id="students-table" style="display: none;">
         <thead>
           <tr>
             <th style="width: 60px;">Record</th>
@@ -930,63 +1226,67 @@
             <th>Registration No</th>
             <th>Department</th>
             <th>Course Focus</th>
-            <th>Verification</th>
-            <th style="text-align: right;">Action</th>
+            <th>Status</th>
+            <th style="text-align: right;">Actions</th>
           </tr>
         </thead>
         <tbody id="students-tbody">
-          {% for s in students %}
-          <tr id="row-student-{{ s.id }}" data-name="{{ s.name|lower }}" data-reg="{{ s.reg_no|lower }}" data-dept="{{ s.dept|lower }}" data-course="{{ s.course|lower }}">
-            <td>
-              <span class="code-tag">#{{ s.id }}</span>
-            </td>
-            <td>
-              <div class="student-cell">
-                <div class="student-avatar" style="background: {{ s.avatar_bg }};">
-                  {{ s.initials }}
-                </div>
-                <div class="student-info">
-                  <span class="student-name">{{ s.name }}</span>
-                  <span class="student-email">{{ s.email }}</span>
-                </div>
-              </div>
-            </td>
-            <td>
-              <span class="code-tag">{{ s.reg_no }}</span>
-            </td>
-            <td>{{ s.dept }}</td>
-            <td>{{ s.course }}</td>
-            <td>
-              {% if s.id == 1 %}
-              <span class="badge badge-verified">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-                Author &bull; Verified
-              </span>
-              {% else %}
-              <span class="badge badge-enrolled">
-                Active Enrolled
-              </span>
-              {% endif %}
-            </td>
-            <td style="text-align: right;">
-              {% if s.id != 1 %}
-              <button class="btn btn-danger btn-icon" onclick="promptDelete({{ s.id }}, '{{ s.name }}')" title="Delete student record">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-              </button>
-              {% else %}
-              <span style="font-size: 11px; color: var(--text-tertiary); font-weight: 500;">Protected</span>
-              {% endif %}
-            </td>
-          </tr>
-          {% endfor %}
+          <!-- Dynamically populated -->
         </tbody>
       </table>
 
-      <!-- Empty state when search yields no results -->
-      <div id="empty-state" style="display: none; padding: 48px 20px; text-align: center; color: var(--text-tertiary);">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom: 8px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <p style="font-size: 14px; font-weight: 500;">No matching student records found</p>
-        <p style="font-size: 12px; margin-top: 4px;">Try refining your query or resetting the department filter.</p>
+      <!-- Empty State (Clean Slate as requested) -->
+      <div id="empty-state" class="empty-state-box">
+        <div class="empty-icon-circle">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <p style="font-size: 15px; font-weight: 600; color: #ffffff;">No Student Records Enrolled</p>
+        <p style="font-size: 13px; margin: 4px auto 18px; max-width: 420px; line-height: 1.5;">
+          The student registry is currently clean. Use the button below to enroll a student or seed sample test data.
+        </p>
+        <div style="display: flex; gap: 10px; justify-content: center;">
+          <button class="btn btn-primary" onclick="openAddModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Enroll First Student
+          </button>
+          <button class="btn btn-secondary" onclick="seedSampleData()">
+            ⚡ Populate Sample Records
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTERACTIVE CONTAINER TERMINAL CONSOLE -->
+    <div class="terminal-card">
+      <div class="terminal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div class="terminal-dots">
+            <span class="terminal-dot" style="background: #ef4444;"></span>
+            <span class="terminal-dot" style="background: #f59e0b;"></span>
+            <span class="terminal-dot" style="background: #10b981;"></span>
+          </div>
+          <span style="font-family: 'Fira Code', monospace; font-size: 12px; color: var(--text-secondary);">
+            root@{{ info.container_id }}:/app # container-inspect
+          </span>
+        </div>
+        <span style="font-size: 11px; color: var(--text-tertiary);">Interactive Console</span>
+      </div>
+
+      <div class="terminal-screen" id="terminal-screen">
+$ docker-compose exec flask-container sh
+Welcome to Alpine/Debian Linux Docker Container runtime.
+Type or click chips below to run live container diagnostics.
+      </div>
+
+      <div class="terminal-toolbar">
+        <span style="font-size: 11px; color: var(--text-tertiary); margin-right: 4px;">Quick Run:</span>
+        <span class="term-chip" onclick="execCommand('docker ps')">docker ps</span>
+        <span class="term-chip" onclick="execCommand('docker stats')">docker stats</span>
+        <span class="term-chip" onclick="execCommand('cat Dockerfile')">cat Dockerfile</span>
+        <span class="term-chip" onclick="execCommand('pip list')">pip list</span>
+        <span class="term-chip" onclick="execCommand('uname -a')">uname -a</span>
+        <span class="term-chip" onclick="execCommand('whoami')">whoami</span>
+        <span class="term-chip" onclick="execCommand('uptime')">uptime</span>
       </div>
     </div>
 
@@ -996,28 +1296,29 @@
         Engineered by <strong>Hare Preeth (25BCE5652)</strong> &bull; Containerized with Docker Engine on <code>{{ info.os }}</code>
       </div>
       <div>
-        UTC Timestamp: <span id="kpi-server-time" style="font-family: 'Fira Code', monospace;">{{ info.server_time }}</span>
+        UTC Clock: <span id="kpi-server-time" style="font-family: 'Fira Code', monospace;">{{ info.server_time }}</span>
       </div>
     </footer>
 
   </div>
 
-  <!-- Add Student Modal Dialog -->
-  <div class="modal-backdrop" id="add-modal" onclick="handleBackdropClick(event)">
+  <!-- ADD / EDIT STUDENT MODAL DIALOG -->
+  <div class="modal-backdrop" id="student-modal" onclick="handleBackdropClick(event)">
     <div class="modal-dialog">
       <div class="modal-header">
-        <h3 class="modal-title">Enroll New Student</h3>
-        <button class="modal-close" onclick="closeAddModal()">&times;</button>
+        <h3 class="modal-title" id="modal-dialog-title">Enroll New Student</h3>
+        <button class="modal-close" onclick="closeStudentModal()">&times;</button>
       </div>
-      <form id="add-form" onsubmit="submitNewStudent(event)">
+      <form id="student-form" onsubmit="submitStudentForm(event)">
+        <input type="hidden" id="edit-student-id" value="">
         <div class="modal-body">
           <div class="form-group">
             <label class="form-label">Full Name</label>
-            <input type="text" id="m-name" class="form-control" placeholder="e.g. John Doe" required autofocus>
+            <input type="text" id="m-name" class="form-control" placeholder="e.g. Hare Preeth" required autofocus>
           </div>
           <div class="form-group">
             <label class="form-label">Registration Number</label>
-            <input type="text" id="m-reg" class="form-control" placeholder="e.g. 25BCE5999" required>
+            <input type="text" id="m-reg" class="form-control" placeholder="e.g. 25BCE5652" required>
           </div>
           <div class="form-group">
             <label class="form-label">Department</label>
@@ -1029,7 +1330,7 @@
           </div>
           <div class="form-group">
             <label class="form-label">Course / Lab Module</label>
-            <input type="text" id="m-course" class="form-control" value="Docker & Cloud Virtualization (DA3)" required>
+            <input type="text" id="m-course" class="form-control" value="Docker &amp; Cloud Virtualization (DA3)" required>
           </div>
           <div class="form-group">
             <label class="form-label">Email Address (Optional)</label>
@@ -1037,7 +1338,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" onclick="closeAddModal()">Cancel</button>
+          <button type="button" class="btn btn-secondary" onclick="closeStudentModal()">Cancel</button>
           <button type="submit" class="btn btn-primary" id="btn-submit-student">Save Record</button>
         </div>
       </form>
@@ -1048,19 +1349,74 @@
   <div class="toast-container" id="toast-container"></div>
 
   <script>
-    // Toast Notification helper
+    // --- AUDIO SYNTHESIZER FOR TACTILE SOUNDS ---
+    let soundEnabled = true;
+    let audioCtx = null;
+
+    function playAudio(type = 'click') {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        const now = audioCtx.currentTime;
+
+        if (type === 'click') {
+          osc.frequency.setValueAtTime(800, now);
+          osc.frequency.exponentialRampToValueAtTime(400, now + 0.05);
+          gain.gain.setValueAtTime(0.04, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+          osc.start(now);
+          osc.stop(now + 0.05);
+        } else if (type === 'success') {
+          osc.frequency.setValueAtTime(523.25, now); // C5
+          osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
+          gain.gain.setValueAtTime(0.06, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+          osc.start(now);
+          osc.stop(now + 0.25);
+        } else if (type === 'delete') {
+          osc.frequency.setValueAtTime(320, now);
+          osc.frequency.exponentialRampToValueAtTime(140, now + 0.12);
+          gain.gain.setValueAtTime(0.05, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+          osc.start(now);
+          osc.stop(now + 0.12);
+        }
+      } catch (e) {
+        // Audio API fallback
+      }
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const btn = document.getElementById('sound-btn');
+      if (soundEnabled) {
+        btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>`;
+        showToast('Tactile audio enabled');
+        playAudio('success');
+      } else {
+        btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>`;
+        showToast('Tactile audio muted');
+      }
+    }
+
+    // --- TOAST NOTIFICATIONS ---
     function showToast(msg) {
       const container = document.getElementById('toast-container');
       const toast = document.createElement('div');
       toast.className = 'toast-card';
       toast.innerHTML = `
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
         <span>${msg}</span>
       `;
       container.appendChild(toast);
-      
       requestAnimationFrame(() => toast.classList.add('show'));
-      
       setTimeout(() => {
         toast.classList.remove('show');
         setTimeout(() => toast.remove(), 250);
@@ -1068,190 +1424,416 @@
     }
 
     function copyValue(val, msg) {
+      playAudio('click');
       navigator.clipboard.writeText(val).then(() => {
         showToast(msg || 'Copied to clipboard');
-      }).catch(() => {
-        showToast('Copied: ' + val);
       });
     }
 
-    // Modal controls
-    function openAddModal() {
-      document.getElementById('add-modal').classList.add('open');
-      document.getElementById('m-name').focus();
+    // --- CONFETTI PARTICLE SYSTEM ---
+    function triggerConfetti() {
+      const canvas = document.getElementById('confetti-canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const particles = [];
+      const colors = ['#38bdf8', '#818cf8', '#34d399', '#f472b6', '#fbbf24'];
+
+      for (let i = 0; i < 60; i++) {
+        particles.push({
+          x: canvas.width / 2,
+          y: canvas.height / 3,
+          vx: (Math.random() - 0.5) * 12,
+          vy: (Math.random() - 0.7) * 12,
+          size: Math.random() * 6 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          alpha: 1,
+          rot: Math.random() * 360
+        });
+      }
+
+      function render() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let alive = false;
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.35; // gravity
+          p.alpha -= 0.015;
+          p.rot += 4;
+
+          if (p.alpha > 0) {
+            alive = true;
+            ctx.save();
+            ctx.globalAlpha = p.alpha;
+            ctx.translate(p.x, p.y);
+            ctx.rotate((p.rot * Math.PI) / 180);
+            ctx.fillStyle = p.color;
+            ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+            ctx.restore();
+          }
+        });
+
+        if (alive) requestAnimationFrame(render);
+        else ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+      render();
     }
 
-    function closeAddModal() {
-      document.getElementById('add-modal').classList.remove('open');
-    }
+    // --- DOCKER FILE STUDIO (LIVE EDITOR & PRESETS) ---
+    let currentActiveFile = 'Dockerfile';
+    const PRESETS = {
+      python_slim: `FROM python:3.11-slim\nWORKDIR /app\nCOPY requirements.txt .\nRUN pip install --no-cache-dir -r requirements.txt\nCOPY . .\nEXPOSE 5000\nCMD ["python", "app.py"]`,
+      python_alpine: `FROM python:3.11-alpine\nWORKDIR /app\nRUN apk add --no-cache gcc musl-dev linux-headers\nCOPY requirements.txt .\nRUN pip install --no-cache-dir -r requirements.txt\nCOPY . .\nEXPOSE 5000\nCMD ["python", "app.py"]`,
+      multistage: `# Stage 1: Builder\nFROM python:3.11-slim AS builder\nWORKDIR /app\nCOPY requirements.txt .\nRUN pip install --user --no-cache-dir -r requirements.txt\n\n# Stage 2: Hardened Runtime\nFROM python:3.11-slim\nWORKDIR /app\nCOPY --from=builder /root/.local /root/.local\nCOPY . .\nENV PATH=/root/.local/bin:$PATH\nEXPOSE 5000\nCMD ["python", "app.py"]`,
+      fastapi: `FROM python:3.11-slim\nWORKDIR /app\nCOPY requirements.txt .\nRUN pip install --no-cache-dir -r requirements.txt\nCOPY . .\nEXPOSE 8000\nCMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]`
+    };
 
-    function handleBackdropClick(e) {
-      if (e.target.id === 'add-modal') {
-        closeAddModal();
+    async function loadFileContent(filename) {
+      try {
+        const res = await fetch(`/api/files/${filename}`);
+        const data = await res.json();
+        if (data.success) {
+          document.getElementById('code-editor').value = data.content;
+          document.getElementById('active-filename-display').innerText = filename;
+          document.getElementById('file-size-info').innerText = `${data.size_bytes} bytes (${data.lines} lines)`;
+          updateLineNumbers();
+        } else {
+          showToast(data.error || 'Failed to load file');
+        }
+      } catch (e) {
+        showToast('Error loading file from container');
       }
     }
 
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeAddModal();
-    });
+    function switchFile(filename) {
+      playAudio('click');
+      currentActiveFile = filename;
+      document.querySelectorAll('.file-tab').forEach(t => t.classList.remove('active'));
+      if (filename === 'Dockerfile') {
+        document.getElementById('tab-dockerfile').classList.add('active');
+      } else {
+        document.getElementById('tab-requirements').classList.add('active');
+      }
+      loadFileContent(filename);
+    }
 
-    // Real-time table search & department filtering
+    function applyPreset(presetKey) {
+      playAudio('click');
+      if (PRESETS[presetKey]) {
+        document.getElementById('code-editor').value = PRESETS[presetKey];
+        updateLineNumbers();
+        showToast('Loaded preset template');
+      }
+    }
+
+    function updateLineNumbers() {
+      const editor = document.getElementById('code-editor');
+      const lines = editor.value.split('\n').length;
+      let lineHtml = '';
+      for (let i = 1; i <= Math.max(lines, 8); i++) {
+        lineHtml += i + '<br>';
+      }
+      document.getElementById('line-numbers').innerHTML = lineHtml;
+      document.getElementById('file-size-info').innerText = `${editor.value.length} chars (${lines} lines)`;
+    }
+
+    async function saveActiveFile() {
+      playAudio('success');
+      const btn = document.getElementById('save-file-btn');
+      btn.disabled = true;
+      btn.innerText = 'Saving...';
+
+      const content = document.getElementById('code-editor').value;
+      try {
+        const res = await fetch(`/api/files/${currentActiveFile}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ content })
+        });
+        const data = await res.json();
+        if (data.success) {
+          showToast(`Saved ${currentActiveFile} to container filesystem!`);
+          triggerConfetti();
+        } else {
+          showToast(data.error || 'Failed to save');
+        }
+      } catch (e) {
+        showToast('Save failed: Network error');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Save to Container`;
+      }
+    }
+
+    function validateDockerfile() {
+      playAudio('click');
+      const content = document.getElementById('code-editor').value;
+      const issues = [];
+      if (!content.includes('FROM ')) issues.push('Missing base image (FROM)');
+      if (!content.includes('WORKDIR ')) issues.push('No WORKDIR directory set');
+      if (!content.includes('CMD ') && !content.includes('ENTRYPOINT ')) issues.push('No default CMD or ENTRYPOINT');
+
+      if (issues.length === 0) {
+        showToast('Dockerfile syntax verified valid & clean!');
+      } else {
+        alert('Dockerfile Review Notice:\n' + issues.join('\n'));
+      }
+    }
+
+    // --- TERMINAL SIMULATOR ---
+    async function execCommand(cmd) {
+      playAudio('click');
+      const screen = document.getElementById('terminal-screen');
+      screen.innerHTML += `\n<span style="color: #38bdf8;">$ ${cmd}</span>\n`;
+
+      try {
+        const res = await fetch('/api/terminal', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ cmd })
+        });
+        const data = await res.json();
+        screen.innerHTML += `<span style="color: #cbd5e1;">${data.output}</span>\n`;
+        screen.scrollTop = screen.scrollHeight;
+      } catch (e) {
+        screen.innerHTML += `<span style="color: #ef4444;">Error executing command.</span>\n`;
+      }
+    }
+
+    // --- STUDENT DIRECTORY (ADD, EDIT, DELETE, FILTER) ---
+    let localStudents = [];
+
+    async function loadStudents() {
+      try {
+        const res = await fetch('/api/students');
+        const data = await res.json();
+        localStudents = data.students || [];
+        renderStudentTable();
+      } catch (e) {
+        console.warn('Failed to load students', e);
+      }
+    }
+
+    function renderStudentTable() {
+      const tbody = document.getElementById('students-tbody');
+      const table = document.getElementById('students-table');
+      const emptyState = document.getElementById('empty-state');
+      const badge = document.getElementById('record-count-badge');
+
+      badge.innerText = `${localStudents.length} ENROLLED`;
+
+      if (localStudents.length === 0) {
+        table.style.display = 'none';
+        emptyState.style.display = 'block';
+        return;
+      }
+
+      table.style.display = 'table';
+      emptyState.style.display = 'none';
+
+      tbody.innerHTML = localStudents.map(s => `
+        <tr id="row-student-${s.id}" data-name="${s.name.toLowerCase()}" data-reg="${s.reg_no.toLowerCase()}" data-dept="${s.dept.toLowerCase()}" data-course="${s.course.toLowerCase()}">
+          <td><span class="code-tag">#${s.id}</span></td>
+          <td>
+            <div class="student-cell">
+              <div class="student-avatar" style="background: ${s.avatar_bg};">
+                ${s.initials}
+              </div>
+              <div class="student-info">
+                <span class="student-name">${s.name}</span>
+                <span class="student-email">${s.email}</span>
+              </div>
+            </div>
+          </td>
+          <td><span class="code-tag">${s.reg_no}</span></td>
+          <td>${s.dept}</td>
+          <td>${s.course}</td>
+          <td><span class="badge badge-enrolled">${s.status}</span></td>
+          <td style="text-align: right;">
+            <div class="action-group">
+              <button class="btn btn-secondary btn-icon" onclick="openEditModal(${s.id})" title="Edit student record">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              </button>
+              <button class="btn btn-danger btn-icon" onclick="deleteStudent(${s.id}, '${s.name}')" title="Delete record">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
     function filterStudents() {
       const query = document.getElementById('table-search').value.toLowerCase().trim();
       const deptFilter = document.getElementById('dept-filter').value;
       const rows = document.querySelectorAll('#students-tbody tr');
-      let visibleCount = 0;
+      let visible = 0;
 
-      rows.forEach(row => {
-        const name = row.getAttribute('data-name') || '';
-        const reg = row.getAttribute('data-reg') || '';
-        const course = row.getAttribute('data-course') || '';
-        const dept = row.getAttribute('data-dept') || '';
+      rows.forEach(r => {
+        const name = r.getAttribute('data-name');
+        const reg = r.getAttribute('data-reg');
+        const course = r.getAttribute('data-course');
+        const dept = r.getAttribute('data-dept');
 
         const matchesQuery = !query || name.includes(query) || reg.includes(query) || course.includes(query);
-        const matchesDept = (deptFilter === 'ALL') || dept.toLowerCase().includes(deptFilter.toLowerCase());
+        const matchesDept = deptFilter === 'ALL' || dept.includes(deptFilter.toLowerCase());
 
         if (matchesQuery && matchesDept) {
-          row.style.display = '';
-          visibleCount++;
+          r.style.display = '';
+          visible++;
         } else {
-          row.style.display = 'none';
+          r.style.display = 'none';
         }
       });
-
-      const emptyState = document.getElementById('empty-state');
-      const table = document.getElementById('students-table');
-      if (visibleCount === 0) {
-        emptyState.style.display = 'block';
-      } else {
-        emptyState.style.display = 'none';
-      }
-
-      document.getElementById('record-count-badge').innerText = `${visibleCount} ENROLLED`;
+      document.getElementById('record-count-badge').innerText = `${visible} ENROLLED`;
     }
 
-    // Add Student Submit Handler
-    async function submitNewStudent(e) {
-      e.preventDefault();
-      const btn = document.getElementById('btn-submit-student');
-      btn.disabled = true;
-      btn.innerText = 'Saving...';
+    // Modal controls for Add & Edit
+    function openAddModal() {
+      playAudio('click');
+      document.getElementById('edit-student-id').value = '';
+      document.getElementById('modal-dialog-title').innerText = 'Enroll New Student';
+      document.getElementById('student-form').reset();
+      document.getElementById('student-modal').classList.add('open');
+      document.getElementById('m-name').focus();
+    }
 
+    function openEditModal(id) {
+      playAudio('click');
+      const student = localStudents.find(s => s.id === id);
+      if (!student) return;
+
+      document.getElementById('edit-student-id').value = id;
+      document.getElementById('modal-dialog-title').innerText = `Edit Student #${id}`;
+      document.getElementById('m-name').value = student.name;
+      document.getElementById('m-reg').value = student.reg_no;
+      document.getElementById('m-dept').value = student.dept;
+      document.getElementById('m-course').value = student.course;
+      document.getElementById('m-email').value = student.email;
+      document.getElementById('student-modal').classList.add('open');
+    }
+
+    function closeStudentModal() {
+      document.getElementById('student-modal').classList.remove('open');
+    }
+
+    function handleBackdropClick(e) {
+      if (e.target.id === 'student-modal') closeStudentModal();
+    }
+
+    async function submitStudentForm(e) {
+      e.preventDefault();
+      const editId = document.getElementById('edit-student-id').value;
       const name = document.getElementById('m-name').value.trim();
       const reg_no = document.getElementById('m-reg').value.trim();
       const dept = document.getElementById('m-dept').value.trim();
       const course = document.getElementById('m-course').value.trim();
       const email = document.getElementById('m-email').value.trim();
 
+      const btn = document.getElementById('btn-submit-student');
+      btn.disabled = true;
+
       try {
-        const res = await fetch('/api/students', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, reg_no, dept, course, email })
-        });
-        const result = await res.json();
-
-        if (result.success && result.student) {
-          const s = result.student;
-          const tbody = document.getElementById('students-tbody');
-          const tr = document.createElement('tr');
-          tr.id = `row-student-${s.id}`;
-          tr.setAttribute('data-name', s.name.toLowerCase());
-          tr.setAttribute('data-reg', s.reg_no.toLowerCase());
-          tr.setAttribute('data-dept', s.dept.toLowerCase());
-          tr.setAttribute('data-course', s.course.toLowerCase());
-
-          tr.innerHTML = `
-            <td><span class="code-tag">#${s.id}</span></td>
-            <td>
-              <div class="student-cell">
-                <div class="student-avatar" style="background: ${s.avatar_bg};">
-                  ${s.initials}
-                </div>
-                <div class="student-info">
-                  <span class="student-name">${s.name}</span>
-                  <span class="student-email">${s.email}</span>
-                </div>
-              </div>
-            </td>
-            <td><span class="code-tag">${s.reg_no}</span></td>
-            <td>${s.dept}</td>
-            <td>${s.course}</td>
-            <td><span class="badge badge-enrolled">Active Enrolled</span></td>
-            <td style="text-align: right;">
-              <button class="btn btn-danger btn-icon" onclick="promptDelete(${s.id}, '${s.name}')" title="Delete record">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-              </button>
-            </td>
-          `;
-          tbody.appendChild(tr);
-
-          document.getElementById('add-form').reset();
-          closeAddModal();
-          showToast(`Student record for ${s.name} enrolled.`);
-          filterStudents();
+        if (editId) {
+          // PUT request
+          const res = await fetch(`/api/students/${editId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, reg_no, dept, course, email })
+          });
+          const result = await res.json();
+          if (result.success) {
+            playAudio('success');
+            showToast(`Student #${editId} updated.`);
+            await loadStudents();
+            closeStudentModal();
+          }
         } else {
-          showToast(result.error || 'Failed to save student.');
+          // POST request
+          const res = await fetch('/api/students', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, reg_no, dept, course, email })
+          });
+          const result = await res.json();
+          if (result.success) {
+            playAudio('success');
+            triggerConfetti();
+            showToast(`Enrolled: ${name}`);
+            await loadStudents();
+            closeStudentModal();
+          }
         }
       } catch (err) {
-        showToast('Network error while saving.');
+        showToast('Network error while saving student.');
       } finally {
         btn.disabled = false;
-        btn.innerText = 'Save Record';
       }
     }
 
-    // Delete Student Handler
-    async function promptDelete(id, name) {
-      if (!confirm(`Are you sure you want to delete student record for ${name}?`)) return;
+    async function deleteStudent(id, name) {
+      playAudio('delete');
+      if (!confirm(`Purge student record for ${name} (#${id})?`)) return;
 
       try {
         const res = await fetch(`/api/students/${id}`, { method: 'DELETE' });
         const result = await res.json();
         if (result.success) {
-          const row = document.getElementById(`row-student-${id}`);
-          if (row) {
-            row.style.opacity = '0';
-            setTimeout(() => {
-              row.remove();
-              filterStudents();
-            }, 200);
-          }
-          showToast(`Record #${id} purged.`);
-        } else {
-          showToast('Failed to delete student.');
+          showToast(`Student #${id} purged.`);
+          await loadStudents();
         }
       } catch (e) {
-        showToast('Error communicating with server.');
+        showToast('Error deleting student.');
       }
     }
 
-    // Export records to JSON download
+    // Populate demo data on demand
+    async function seedSampleData() {
+      playAudio('click');
+      const samples = [
+        { name: "Hare Preeth", reg_no: "25BCE5652", dept: "Computer Science & Engineering", course: "Docker & Cloud Virtualization (DA3)", email: "harepreethkumar2711@gmail.com" },
+        { name: "Alex Mercer", reg_no: "25BCE5012", dept: "Information Technology", course: "Operating Systems & RTOS Lab", email: "alex.mercer@college.edu" },
+        { name: "Sarah Connor", reg_no: "25BCE5144", dept: "Computer Science & Engineering", course: "Microservices & Distributed Systems", email: "sarah.connor@college.edu" }
+      ];
+
+      for (const s of samples) {
+        await fetch('/api/students', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(s)
+        });
+      }
+      triggerConfetti();
+      showToast('Seeded 3 sample student records');
+      await loadStudents();
+    }
+
     async function exportJSON() {
-      try {
-        const res = await fetch('/api/students');
-        const data = await res.json();
-        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `students_docker_export_${Date.now()}.json`;
-        a.click();
-        URL.revokeObjectURL(url);
-        showToast('JSON export downloaded');
-      } catch (e) {
-        showToast('Export failed');
-      }
+      playAudio('click');
+      const blob = new Blob([JSON.stringify(localStudents, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `student_registry_${Date.now()}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('Exported JSON successfully');
     }
 
-    // Live Metrics Sync with animated spin
+    // Periodic ping and telemetry sync
     async function fetchLiveStats() {
       const icon = document.getElementById('sync-icon');
       icon.style.transition = 'transform 0.6s ease';
       icon.style.transform = 'rotate(360deg)';
 
+      const start = performance.now();
       try {
         const res = await fetch('/api/stats');
+        const ping = Math.round(performance.now() - start);
+        document.getElementById('live-ping').innerText = `Online \u2022 ${ping}ms`;
+
         const data = await res.json();
         if (data) {
           document.getElementById('kpi-uptime').innerText = data.uptime_str;
@@ -1260,18 +1842,16 @@
           document.getElementById('kpi-disk-used').innerText = data.disk_used_gb;
           document.getElementById('kpi-disk-bar').style.width = data.disk_percent + '%';
           document.getElementById('kpi-server-time').innerText = data.server_time;
-          showToast('Telemetry refreshed from container');
+          showToast('Telemetry refreshed');
         }
-      } catch (err) {
-        console.warn(err);
+      } catch (e) {
+        console.warn(e);
       } finally {
-        setTimeout(() => {
-          icon.style.transform = 'rotate(0deg)';
-        }, 600);
+        setTimeout(() => icon.style.transform = 'rotate(0deg)', 600);
       }
     }
 
-    // Live continuous uptime counter
+    // Uptime tick counter
     let currentSeconds = {{ info.uptime_seconds }};
     setInterval(() => {
       currentSeconds++;
@@ -1282,6 +1862,12 @@
       const uptimeEl = document.getElementById('kpi-uptime');
       if (uptimeEl) uptimeEl.innerText = fmt;
     }, 1000);
+
+    // Initial boot
+    window.addEventListener('DOMContentLoaded', () => {
+      loadFileContent('Dockerfile');
+      loadStudents();
+    });
   </script>
 </body>
 </html>
